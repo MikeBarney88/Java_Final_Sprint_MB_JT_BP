@@ -1,10 +1,10 @@
 package org.keyin.customlogger;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class CustomLogger {
-    private static final String filePath = "applicationlogs.txt";
     private static BufferedWriter bufferedWriter;
 
     /**
@@ -15,8 +15,17 @@ public class CustomLogger {
      * @param message The error message to log.
      * @throws IOException If an I/O error occurs while writing to the log file.
      */
-    public  void logError(String message) throws IOException, IOException {
+    public void logError(String message) throws IOException {
         // TODO: Write the error message to the log file, prefixed with "ERROR:"
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter("org/keyin/customlogger/applicationlog.txt", true));
+            writer.write("ERROR: " + message);
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
     }
 
     /**
@@ -27,8 +36,17 @@ public class CustomLogger {
      * @param message The info message to log.
      * @throws IOException If an I/O error occurs while writing to the log file.
      */
-    public  void logInfo(String message) throws IOException {
+    public void logInfo(String message) throws IOException {
         // TODO: Write the info message to the log file, prefixed with "INFO:"
+        BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter("org/keyin/customlogger/applicationlog.txt", true));
+            writer.write("INFO: " + message);
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            throw new IOException(e);
+        }
     }
 
 

@@ -2,11 +2,18 @@ package org.keyin.user;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.sql.SQLException;
+
 /**
     This is the parent class for all users, There are 3 types of users: Trainer, Member, and Admin.
 */
 public class User {
     //Instance Fields
+    /**
+        The unique database ID automatically assigned to the user, thus it is only ever given a value in the database specific constructor. If it has a value of 0 then that user has not yet been assigned a database ID.
+    */
+    private int id;
+
     /**
         The display name in which the user is to be referred to as.
     */
@@ -42,8 +49,15 @@ public class User {
     /**
         The User class' only constructor, because all values herein are required to be defined.
     */
-    public User(String username, String password, String email, String phoneNumber, String address, String role) throws IllegalArgumentException {
-        this.username = username;
+    public User(String username, String password, String email, String phoneNumber, String address, String role) throws IllegalArgumentException, SQLException {
+        this.id = 0;
+
+        if (UserDao.selectUserByUsername(username) == null) {
+            this.username = username;
+        } else {
+            throw new IllegalArgumentException("The username passed to User's constructor is already in use.");
+        }
+
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
 
         if (email.contains("@")) {
@@ -65,6 +79,22 @@ public class User {
         } else {
             throw new IllegalArgumentException("An invalid role value was passed to User's constructor.");
         }
+
+
+        //TODO: Add user to database upon passing all constructor validation.
+    }
+
+    /**
+        This is the constructor used to translate database results into User objects.
+    */
+    public User(int id, String username, String password, String email, String phoneNumber, String address, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password; //Should be hashed already as that was done before the user was first added to the database. No validation is in this constructor for a similar reason.
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.role = role;
     }
 
 
