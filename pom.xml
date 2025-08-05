@@ -15,7 +15,7 @@
     </properties>
 
 
-<!--    You should not need to add any more dependencies that what is already here for you-->
+<!--    You should not need to add any more dependencies than what is already here for you-->
 <!--    You have access to Postgres driver to be able to connect to the PG database-->
 <!--    You have access to jBCrypt to be able to hash passwords in your system-->
     <dependencies>
@@ -25,6 +25,7 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.5</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.mindrot/jbcrypt -->
         <dependency>
             <groupId>org.mindrot</groupId>
@@ -32,5 +33,4 @@
             <version>0.4</version>
         </dependency>
     </dependencies>
-
 </project>

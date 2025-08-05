@@ -1,8 +1,7 @@
 package org.keyin;
 
-
-
 import org.keyin.memberships.MembershipService;
+import org.keyin.user.User;
 import org.keyin.user.UserService;
 import org.keyin.workoutclasses.WorkoutClassService;
 
@@ -54,7 +53,7 @@ public class GymApp {
         scanner.close();
     }
 
-    private static void logInAsUser(Scanner scanner, UserService userService, MembershipService membershipService, WorkoutService workoutService) {
+    private static void logInAsUser(Scanner scanner, UserService userService, MembershipService membershipService, WorkoutClassService workoutService) {
         System.out.print("Enter username: ");
         String username = scanner.nextLine();
         System.out.print("Enter password: ");
