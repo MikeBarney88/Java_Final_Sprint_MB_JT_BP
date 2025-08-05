@@ -21,7 +21,6 @@ public class GymProduct {
      * Constructor with parameters
      */
     public GymProduct(String productName, String category, double price, int stockQuantity, String description) {
-        this();
         this.productName = productName;
         this.category = category;
         this.price = price;
@@ -90,5 +89,15 @@ public class GymProduct {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    /**
+     * toString Method
+     * @return string value of gym products
+     */
+    @Override
+    public String toString() {
+        return String.format("GymProduct{id=%d, name='%s', category='%s', price=%.2f, stock=%d}",
+                productId, productName, category, price, stockQuantity);
     }
 }
