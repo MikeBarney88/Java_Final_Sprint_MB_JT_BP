@@ -20,8 +20,8 @@ public class GymProductDAO {
         String createTableSQL = """
             CREATE TABLE IF NOT EXISTS gym_products (
                 product_id SERIAL PRIMARY KEY,
-                product_name VARCHAR(100) NOT NULL,
-                category VARCHAR(50) NOT NULL,
+                product_name TEXT NOT NULL,
+                category TEXT NOT NULL,
                 price DECIMAL(10,2) NOT NULL,
                 stock_quantity INTEGER NOT NULL,
                 description TEXT
