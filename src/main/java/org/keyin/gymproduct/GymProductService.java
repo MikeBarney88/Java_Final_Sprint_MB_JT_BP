@@ -16,7 +16,7 @@ public class GymProductService {
      * Members can view all the products available at the gym to purchase
      * Trainers can view all the products like the Member
      */
-    public void viewAllProducts() {
+    public static void viewAllProducts() {
         List<GymProduct> allProducts = GymProductDAO.getAllProducts();
 
         if (allProducts.isEmpty()) {

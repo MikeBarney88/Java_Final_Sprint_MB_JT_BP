@@ -1,7 +1,6 @@
 package org.keyin.user;
 
 import org.mindrot.jbcrypt.BCrypt;
-
 import java.sql.SQLException;
 
 /**

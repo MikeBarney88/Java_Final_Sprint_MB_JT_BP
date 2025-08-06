@@ -1,9 +1,9 @@
 package org.keyin.user.childclasses;
 
+import org.keyin.gymproduct.GymProductService;
 import org.keyin.user.User;
 import org.keyin.workoutclasses.WorkoutClass;
-import org.keyin.workoutclasses.WorkoutClassDAO;
-
+import org.keyin.workoutclasses.WorkoutClassService;
 import java.sql.SQLException;
 
 /**
@@ -20,10 +20,10 @@ public class Member extends User {
 
     //Role-Specific Methods
     /**
-     * Will allow the member to view a list of the currently available WorkoutClasses.
+     * Will allow the Member to view a list of the currently available WorkoutClasses.
      */
     public void viewWorkoutClasses() {
-        //List<WorkoutClass> workoutClassList = WorkoutClassDAO.selectAllClasses() or something idk man
+        //List<WorkoutClass> workoutClassList = WorkoutClassService.selectAllClasses() or something idk man
 
         //for (WorkoutClass woClass : workoutClassList) {
             //System.out.printf("%s\n", woClass)
@@ -34,7 +34,7 @@ public class Member extends User {
      * Retrieves and displays this Member's total cost spent on Memberships.
      */
     public void viewTotalMembershipExpenses() {
-        //MembershipDAO.getUserByID(this.id) or something maybe
+        //MembershipService.getUserByID(this.id) or something maybe
     }
 
     /**
@@ -45,6 +45,9 @@ public class Member extends User {
     }
 
     /**
-     * Allows Member to view
+     * Allows the Member to view all available products for sale at the gym.
      */
+    public void viewAllProducts() {
+        GymProductService.viewAllProducts();
+    }
 }

@@ -15,7 +15,7 @@ public class CustomLogger {
      * @param message The error message to log.
      * @throws IOException If an I/O error occurs while writing to the log file.
      */
-    public void logError(String message) throws IOException {
+    public static void logError(String message) throws IOException {
         // TODO: Write the error message to the log file, prefixed with "ERROR:"
         BufferedWriter writer;
         try {
@@ -36,7 +36,7 @@ public class CustomLogger {
      * @param message The info message to log.
      * @throws IOException If an I/O error occurs while writing to the log file.
      */
-    public void logInfo(String message) throws IOException {
+    public static void logInfo(String message) throws IOException {
         // TODO: Write the info message to the log file, prefixed with "INFO:"
         BufferedWriter writer;
         try {

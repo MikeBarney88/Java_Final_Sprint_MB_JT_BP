@@ -1,7 +1,9 @@
 package org.keyin.user;
 
+import org.keyin.customlogger.CustomLogger;
 import org.keyin.database.DatabaseConnection;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class UserDAO {
                 while (rs.next()) {
                     allUserResults.add(new User(
                             rs.getInt("user_id"),
-                            rs.getString("user_name"),
+                            rs.getString("user_username"),
                             rs.getString("user_password"),
                             rs.getString("user_email"),
                             rs.getString("user_phone_number"),
@@ -42,7 +44,7 @@ public class UserDAO {
                 if (rs.next()) {
                     return new User(
                             rs.getInt("user_id"),
-                            rs.getString("user_name"),
+                            rs.getString("user_username"),
                             rs.getString("user_password"),
                             rs.getString("user_email"),
                             rs.getString("user_phone_number"),
@@ -54,5 +56,26 @@ public class UserDAO {
         }
 
        return null;
+    }
+
+    public static void insertNewUser(User newUser) throws SQLException, IOException {
+        String sql = "INSERT INTO users(user_username, user_password, user_email, user_phoneNumber, user_address, user_role) VALUES (?, ?, ?, ?, ?, ?)";
+        DriverManager DatabaseConnector;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, newUser.getUsername());
+            pstmt.setString(2, newUser.getPassword());
+            pstmt.setString(3, newUser.getEmail());
+            pstmt.setString(4, newUser.getPhoneNumber());
+            pstmt.setString(5, newUser.getAddress());
+            pstmt.setString(6, newUser.getRole());
+
+            try {
+                pstmt.executeQuery();
+            } catch (SQLException e) {
+                CustomLogger.logError(e.getMessage());
+            }
+        }
     }
 }
