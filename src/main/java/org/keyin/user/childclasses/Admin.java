@@ -1,9 +1,12 @@
 package org.keyin.user.childclasses;
 
+import org.keyin.gymproduct.GymProduct;
+import org.keyin.gymproduct.GymProductDAO;
 import org.keyin.user.User;
 import org.keyin.user.UserDao;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
     User account with the role of "admin" belong to this childclass, granting them the required privileges.
@@ -40,5 +43,36 @@ public class Admin extends User {
     /**
         Displays all currently active gym memberships and their cumulative annual revenue.
     */
-    //public ArrayList<Membership> selectAllMemberships() {}
+    //public ArrayList<Membership> getAllMemberships() {}
+
+    /**
+        Allows this Admin User to define a new product to be sold.
+    */
+    public void createProduct(String productName, String category, double price, int stockQuantity, String description) {
+        GymProduct newProduct = new GymProduct(productName, category, price, stockQuantity, description);
+
+        GymProductDAO.addProduct(newProduct);
+    }
+
+    /**
+        Lets this Admin User edit the price of an existing GymProduct.
+    */
+    public void setPrice(int productID, double newPrice) {
+        GymProductDAO.updateProductPrice(productID, newPrice);
+    }
+
+    /**
+        Displays to the Admin User every item currently in stock and their cumulative value.
+    */
+    public void showAllProducts() {
+        List<GymProduct> productList = GymProductDAO.getAllProducts();
+        double totalValue = 0;
+
+        System.out.println();
+        for (GymProduct product : productList) {
+            System.out.printf("%s\n", product);
+            totalValue += product.getPrice();
+        }
+        System.out.println("\n===All Products Listed===\n\nTotal Value: $" + String.format("%,.2f", totalValue));
+    }
 }

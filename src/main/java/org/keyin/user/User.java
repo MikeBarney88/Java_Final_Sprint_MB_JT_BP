@@ -90,7 +90,7 @@ public class User {
     public User(int id, String username, String password, String email, String phoneNumber, String address, String role) {
         this.id = id;
         this.username = username;
-        this.password = password; //Should be hashed already as that was done before the user was first added to the database. No validation is in this constructor for a similar reason.
+        this.password = password; //Should be hashed already as that was done when the User was first created. No validation is in this constructor for a similar reason.
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
