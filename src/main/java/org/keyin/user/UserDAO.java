@@ -5,7 +5,7 @@ import org.keyin.database.DatabaseConnection;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class UserDao {
+public class UserDAO {
     public static ArrayList<User> selectAllUsers() throws SQLException {
         String sql = "SELECT * FROM users";
         DriverManager DatabaseConnector;

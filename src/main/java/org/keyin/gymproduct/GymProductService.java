@@ -45,7 +45,7 @@ public class GymProductService {
      * ADMIN SERVICES
      * Admins can add new items
      */
-    public boolean addNewItem(UserRole userRole, String name, String category, double price, int stock, String description) {
+    public static boolean addNewItem(UserRole userRole, String name, String category, double price, int stock, String description) {
         if (userRole != UserRole.ADMIN) {
             System.out.println("Access denied. Admin privileges required.");
             return false;
@@ -80,7 +80,7 @@ public class GymProductService {
      * ADMIN SERVICES
      * Admins can set prices
      */
-    public boolean setPrice(UserRole userRole, int productId, double newPrice) {
+    public static boolean setPrice(UserRole userRole, int productId, double newPrice) {
         if (userRole != UserRole.ADMIN) {
             System.out.println("Access denied. Admin privileges required.");
             return false;
@@ -112,7 +112,7 @@ public class GymProductService {
      * ADMIN SERVICES
      * Admins can print a report of all items in stock
      */
-    public void printStockReport(UserRole userRole) {
+    public static void printStockReport(UserRole userRole) {
         if (userRole != UserRole.ADMIN) {
             System.out.println("Access denied. Admin privileges required.");
             return;
