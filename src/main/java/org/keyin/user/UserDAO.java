@@ -58,6 +58,7 @@ public class UserDAO {
        return null;
     }
 
+
     public static void insertNewUser(User newUser) throws SQLException, IOException {
         String sql = "INSERT INTO users(user_username, user_password, user_email, user_phoneNumber, user_address, user_role) VALUES (?, ?, ?, ?, ?, ?)";
         DriverManager DatabaseConnector;
@@ -73,6 +74,22 @@ public class UserDAO {
 
             try {
                 pstmt.executeQuery();
+            } catch (SQLException e) {
+                CustomLogger.logError(e.getMessage());
+            }
+        }
+    }
+
+
+    public static void deleteUser(User user) throws SQLException, IOException {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        DriverManager DatabaseConnector;
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, user.getID());
+            try {
+                pstmt.execute();
             } catch (SQLException e) {
                 CustomLogger.logError(e.getMessage());
             }
