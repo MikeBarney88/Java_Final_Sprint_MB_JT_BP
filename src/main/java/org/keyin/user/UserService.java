@@ -1,5 +1,8 @@
 package org.keyin.user;
 
+import org.keyin.user.childclasses.Admin;
+import org.keyin.user.childclasses.Member;
+import org.keyin.user.childclasses.Trainer;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
@@ -12,8 +15,6 @@ public class UserService {
 
         assert potentialUser != null; //"assert" keyword kind of acts like a shorter if statement, it's similar to Jest's "expect()" function.
         if (BCrypt.checkpw(password, potentialUser.getPassword())) {
-            //if (potentialUser.getRole().equals())
-
             return potentialUser;
         } else {
             return null;

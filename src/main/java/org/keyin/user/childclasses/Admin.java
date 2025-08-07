@@ -5,6 +5,8 @@ import org.keyin.gymproduct.GymProductDAO;
 import org.keyin.gymproduct.GymProductService;
 import org.keyin.user.User;
 import org.keyin.user.UserDAO;
+
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,17 @@ public class Admin extends User {
      */
     public User getUser(String username) throws SQLException {
         return UserDAO.selectUserByUsername(username);
+    }
+
+    /**
+     * This method lets the Admin User delete the given User from the database.
+     *
+     * @param username The username of the User to be deleted.
+     */
+    public void deleteUser(String username) throws SQLException, IOException {
+        User user = getUser(username);
+
+        UserDAO.deleteUser(user);
     }
 
     /**

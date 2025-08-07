@@ -50,7 +50,7 @@ public class Trainer extends User {
     /**
      * Allows the Trainer to view all available products for sale at the gym.
      */
-    public void viewAllProducts() {
+    public void showAllProducts() {
         GymProductService.viewAllProducts();
     }
 }

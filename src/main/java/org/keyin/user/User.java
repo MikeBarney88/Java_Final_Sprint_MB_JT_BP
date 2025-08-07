@@ -107,6 +107,14 @@ public class User {
 
 
     //Getter Methods
+
+    /**
+     * Returns this User's ID. Remember that this value is always zero before being saved to the database for the first time.
+     */
+    public int getID() {
+        return this.id;
+    }
+
     /**
      * Retrieves this User's username.
      */
