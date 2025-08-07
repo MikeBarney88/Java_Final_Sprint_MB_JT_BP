@@ -1,16 +1,44 @@
 package org.keyin.memberships;
 
 /**
- * Service class responsible for handling all business logic related to memberships.
- * This class interacts with the MembershipDAO to perform database operations.
- * The DAO should be injected into this service to access its methods.
- * Example usage:
- *   MembershipDAO dao = new MembershipDAO();
- *   // Use dao within service methods
+ * Service class containing business logic for Memberships.
  */
 public class MembershipService {
+    private MembershipDAO dao;
 
-    // Inject the MembershipDAO to access its database methods
-    // MembershipDAO dao = new MembershipDAO();
+    /**
+     * Constructor to initialize the service with a DAO instance.
+     *
+     * @param dao the MembershipDAO instance
+     */
+    public MembershipService(MembershipDAO dao) {
+        this.dao = dao;
+    }
 
+    /**
+     * Processes the purchase of a membership.
+     *
+     * @param membership the Membership to be purchased
+     */
+    public void purchaseMembership(Membership membership) {
+        try {
+            dao.addMembership(membership);
+            System.out.println("Membership purchased successfully.");
+        } catch (Exception e) {
+            System.out.println("Failed to purchase membership: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Displays the total revenue generated from memberships.
+     */
+    public void displayTotalRevenue() {
+        try {
+            double revenue = dao.getTotalRevenue();
+            System.out.println("Total revenue from memberships: $" + revenue);
+        } catch (Exception e) {
+            System.out.println("Error retrieving revenue: " + e.getMessage());
+        }
+    }
 }
+

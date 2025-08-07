@@ -1,33 +1,51 @@
 package org.keyin.memberships;
 
-import org.keyin.customlogger.CustomLogger;
-import org.keyin.database.DatabaseConnection;
+import java.sql.*;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
-// MembershipDAO is responsible for all database operations related to memberships.
+/**
+ * DAO class for performing database operations related to Membership.
+ */
 public class MembershipDAO {
-
+    private Connection conn;
 
     /**
-     * Example method for adding a membership to the database.
-     * This method demonstrates how to use a prepared statement to insert a membership record.
-     * It should take a Membership object as a parameter and insert its details into the database.
+     * Initializes the DAO with a database connection.
      *
-     * Uncomment and update the method to use the actual Membership object and its fields.
+     * @param conn the database connection
      */
-//    public void addMemberShip() throws SQLException {
-//        String sql = "INSERT INTO memberships (membershiptype, membership_price, membership_description, date_purchased, user_id) VALUES (?, ?, ?, ?, ?)";
-//        try (Connection conn = DatabaseConnection.getConnection();
-//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//            pstmt.setString(1, membership.getMembershipType());
-//            pstmt.setInt(2, membership.getMembership_price());
-//            pstmt.setDate(4, Date.valueOf(membership.getDatePurchased()));
-//            pstmt.setInt(5, membership.getUser_id());
-//            pstmt.executeUpdate();
-//        }
-//    }
+    public MembershipDAO(Connection conn) {
+        this.conn = conn;
+    }
+
+    /**
+     * Adds a new membership to the database.
+     *
+     * @param membership the Membership object to add
+     * @throws SQLException if any database error occurs
+     */
+    public void addMembership(Membership membership) throws SQLException {
+        String sql = "INSERT INTO memberships (membershipType, membershipDescription, membershipCost, memberID) VALUES (?, ?, ?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, membership.getMembershipType());
+            stmt.setString(2, membership.getMembershipDescription());
+            stmt.setDouble(3, membership.getMembershipCost());
+            stmt.setInt(4, membership.getMemberId());
+            stmt.executeUpdate();
+        }
+    }
+
+    /**
+     * Calculates and returns the total revenue from all memberships.
+     *
+     * @return the total revenue as a double
+     * @throws SQLException if any database error occurs
+     */
+    public double getTotalRevenue() throws SQLException {
+        String sql = "SELECT SUM(membershipCost) FROM memberships";
+        try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) return rs.getDouble(1);
+        }
+        return 0.0;
+    }
 }
+
