@@ -4,6 +4,8 @@ import org.keyin.gymproduct.GymProductService;
 import org.keyin.user.User;
 import org.keyin.workoutclasses.WorkoutClass;
 import org.keyin.workoutclasses.WorkoutClassService;
+
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -13,7 +15,7 @@ public class Member extends User {
     /**
      * The one and only constructor for the Member childclass of User.
      */
-    public Member(String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException, SQLException {
+    public Member(String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException, SQLException, IOException {
         super(username, password, email, phoneNumber, address, "member");
     }
 

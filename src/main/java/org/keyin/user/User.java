@@ -1,6 +1,8 @@
 package org.keyin.user;
 
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -48,7 +50,7 @@ public class User {
     /**
      * The User class' only constructor, because all values herein are required to be defined.
      */
-    public User(String username, String password, String email, String phoneNumber, String address, String role) throws IllegalArgumentException, SQLException {
+    public User(String username, String password, String email, String phoneNumber, String address, String role) throws IllegalArgumentException, SQLException, IOException {
         this.id = 0;
 
         if (UserDAO.selectUserByUsername(username) == null) {
@@ -79,8 +81,7 @@ public class User {
             throw new IllegalArgumentException("An invalid role value was passed to User's constructor.");
         }
 
-
-        //TODO: Add user to database upon passing all constructor validation.
+        UserDAO.insertNewUser(this);
     }
 
     /**

@@ -20,7 +20,7 @@ public class Admin extends User {
     /**
      * The one and only constructor for the Admin childclass of User.
      */
-    public Admin(String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException, SQLException {
+    public Admin(String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException, SQLException, IOException {
         super(username, password, email, phoneNumber, address, "admin");
     }
 
