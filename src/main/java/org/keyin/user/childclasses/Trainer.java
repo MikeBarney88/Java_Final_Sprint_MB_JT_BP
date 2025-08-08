@@ -2,6 +2,8 @@ package org.keyin.user.childclasses;
 
 import org.keyin.gymproduct.GymProductService;
 import org.keyin.user.User;
+
+import java.io.IOException;
 import java.sql.SQLException;
 
 /**
@@ -11,7 +13,7 @@ public class Trainer extends User {
     /**
      * The one and only constructor for the Trainer childclass of User.
      */
-    public Trainer(String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException, SQLException {
+    public Trainer(String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException, SQLException, IOException {
         super(username, password, email, phoneNumber, address, "trainer");
     }
 

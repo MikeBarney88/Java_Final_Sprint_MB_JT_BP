@@ -22,7 +22,7 @@ public class UserDAO {
                             rs.getString("user_username"),
                             rs.getString("user_password"),
                             rs.getString("user_email"),
-                            rs.getString("user_phone_number"),
+                            rs.getString("user_phonenumber"),
                             rs.getString("user_address"),
                             rs.getString("user_role")
                     ));
@@ -35,7 +35,7 @@ public class UserDAO {
 
 
     public static User selectUserByUsername(String username) throws SQLException {
-        String sql = "SELECT * FROM users WHERE user_name = ?";
+        String sql = "SELECT * FROM users WHERE user_username = ?";
         DriverManager DatabaseConnector;
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -47,7 +47,7 @@ public class UserDAO {
                             rs.getString("user_username"),
                             rs.getString("user_password"),
                             rs.getString("user_email"),
-                            rs.getString("user_phone_number"),
+                            rs.getString("user_phonenumber"),
                             rs.getString("user_address"),
                             rs.getString("user_role")
                     );
@@ -60,7 +60,7 @@ public class UserDAO {
 
 
     public static void insertNewUser(User newUser) throws SQLException, IOException {
-        String sql = "INSERT INTO users(user_username, user_password, user_email, user_phoneNumber, user_address, user_role) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users(user_username, user_password, user_email, user_phonenumber, user_address, user_role) VALUES (?, ?, ?, ?, ?, ?) RETURNING *";
         DriverManager DatabaseConnector;
 
         try (Connection conn = DatabaseConnection.getConnection();

@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class CustomLogger {
-    public static final String LOG_FILE = "org/keyin/customlogger/applicationlog.txt";
+    public static final String LOG_FILE = "logs/applicationlog.txt";
 
     /**
      * Logs an error message to the application log file.
