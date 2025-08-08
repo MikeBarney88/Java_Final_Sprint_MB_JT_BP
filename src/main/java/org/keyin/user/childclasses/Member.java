@@ -19,6 +19,10 @@ public class Member extends User {
         super(username, password, email, phoneNumber, address, "member");
     }
 
+    public Member(int id, String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException {
+        super(id, username, password, email, phoneNumber, address, "member");
+    }
+
 
     //Role-Specific Methods
     /**

@@ -17,6 +17,10 @@ public class Trainer extends User {
         super(username, password, email, phoneNumber, address, "trainer");
     }
 
+    public Trainer(int id, String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException {
+        super(id, username, password, email, phoneNumber, address, "trainer");
+    }
+
 
     //Role-Specific Methods
     /**

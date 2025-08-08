@@ -10,12 +10,22 @@ import java.sql.SQLException;
 
 public class UserService {
     //Login Method
-    public User loginForUser(String username, String password) throws SQLException, AssertionError {
+    public User loginForUser(String username, String password) throws SQLException, AssertionError, IOException {
         User potentialUser = UserDAO.selectUserByUsername(username);
+
 
         assert potentialUser != null; //"assert" keyword kind of acts like a shorter if statement, it's similar to Jest's "expect()" function.
         if (BCrypt.checkpw(password, potentialUser.getPassword())) {
-            return potentialUser;
+            switch (potentialUser.getRole()) {
+                case "admin":
+                    return new Admin(potentialUser.getID(), potentialUser.getUsername(), potentialUser.getPassword(), potentialUser.getEmail(), potentialUser.getPhoneNumber(), potentialUser.getAddress());
+                case "trainer":
+                    return new Trainer(potentialUser.getID(), potentialUser.getUsername(), potentialUser.getPassword(), potentialUser.getEmail(), potentialUser.getPhoneNumber(), potentialUser.getAddress());
+                case "member":
+                    return new Member(potentialUser.getID(), potentialUser.getUsername(), potentialUser.getPassword(), potentialUser.getEmail(), potentialUser.getPhoneNumber(), potentialUser.getAddress());
+                default:
+                return potentialUser;
+            }
         } else {
             return null;
         }

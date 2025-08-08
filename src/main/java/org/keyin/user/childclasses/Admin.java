@@ -24,6 +24,10 @@ public class Admin extends User {
         super(username, password, email, phoneNumber, address, "admin");
     }
 
+    public Admin(int id, String username, String password, String email, String phoneNumber, String address) throws IllegalArgumentException {
+        super(id, username, password, email, phoneNumber, address, "admin");
+    }
+
 
     //Role-Specific Methods
     /**

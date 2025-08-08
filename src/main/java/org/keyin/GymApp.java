@@ -26,11 +26,11 @@ public class GymApp {
         WorkoutClassService workoutClassService = new WorkoutClassService(new WorkoutClassDAO(DatabaseConnection.getConnection()));
 
         //Example users, uncomment them on your first run of the program, then comment them out again to avoid database complications.
-        //new User("ExampleAdmin", "$2a$10$nM02vomxeK/vEMpTLSDmzua6KI3IKl6XMhA76gkmaICpQGIztjOmi", "admin@example.com", "0000000000", "123 easy street", "admin"); //password is "adminPassword"
+        //new User("ExampleAdmin", "adminPassword", "admin@example.com", "0000000000", "123 easy street", "admin");
 
-        //new User("ExampleTrainer", "$2a$10$BmaCuC0tC4luKh6Ih2fOAeIjHCsBYBixRCiRS7zZ3wAuVqmiYaDiS", "trainer@example.com", "0000000000", "123 trainer street", "trainer"); //password is "trainerPassword"
+        //new User("ExampleTrainer", "trainerPassword", "trainer@example.com", "0000000000", "123 trainer street", "trainer");
 
-        //new User("ExampleMember", "$2a$10$J4kwTy6c8FQ9d.UyHdwXM.uS1MC5vWIe/Glivg/bWlRzQfEPoT77W", "member@example.com", "0000000000", "123 member lane", "member"); //password is "memberPassword"
+        //new User("ExampleMember", "memberPassword", "member@example.com", "0000000000", "123 member lane", "member");
 
 
 
