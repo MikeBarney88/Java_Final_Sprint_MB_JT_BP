@@ -20,31 +20,6 @@ public class Member extends User {
 
     //Role-Specific Methods
     /**
-     * Will allow the Member to view a list of the currently available WorkoutClasses.
-     */
-    public void viewWorkoutClasses() {
-        //List<WorkoutClass> workoutClassList = WorkoutClassService.selectAllClasses() or something idk man
-
-        //for (WorkoutClass woClass : workoutClassList) {
-            //System.out.printf("%s\n", woClass)
-        //}
-    }
-
-    /**
-     * Retrieves and displays this Member's total cost spent on Memberships.
-     */
-    public void viewTotalMembershipExpenses() {
-        //MembershipService.getUserByID(this.id) or something maybe
-    }
-
-    /**
-     * Purchases a new gym Membership for the Member.
-     */
-    public void buyMembership() {
-        //MembershipService.buyNewMembership(this.id) or something.
-    }
-
-    /**
      * Allows the Member to view all available products for sale at the gym.
      */
     public void viewAllProducts() {
