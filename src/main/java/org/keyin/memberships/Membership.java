@@ -12,9 +12,25 @@ public class Membership {
     private int memberId;
 
     /**
+     * Constructs a Membership object with the required attributes.
+     *
+     * @param membershipType       the type of membership (e.g., Monthly, Yearly)
+     * @param membershipDescription description of the membership
+     * @param membershipCost       cost of the membership
+     * @param memberId             ID of the member who owns this membership
+     */
+    public Membership(String membershipType, String membershipDescription, double membershipCost, int memberId) {
+        this.membershipId = 0;
+        this.membershipType = membershipType;
+        this.membershipDescription = membershipDescription;
+        this.membershipCost = membershipCost;
+        this.memberId = memberId;
+    }
+
+    /**
      * Constructs a full Membership object with all attributes.
      *
-     * @param membershipId         the ID of the membership
+     * @param membershipId         the ID belonging to this membership
      * @param membershipType       the type of membership (e.g., Monthly, Yearly)
      * @param membershipDescription description of the membership
      * @param membershipCost       cost of the membership

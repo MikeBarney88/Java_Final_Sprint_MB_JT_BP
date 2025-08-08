@@ -1,12 +1,17 @@
 package org.keyin;
 
+import org.keyin.database.DatabaseConnection;
 import org.keyin.customlogger.CustomLogger;
+import org.keyin.memberships.Membership;
+import org.keyin.memberships.MembershipDAO;
 import org.keyin.memberships.MembershipService;
 import org.keyin.user.User;
 import org.keyin.user.UserService;
 import org.keyin.user.childclasses.Admin;
 import org.keyin.user.childclasses.Member;
 import org.keyin.user.childclasses.Trainer;
+import org.keyin.workoutclasses.WorkoutClass;
+import org.keyin.workoutclasses.WorkoutClassDAO;
 import org.keyin.workoutclasses.WorkoutClassService;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,8 +22,8 @@ public class GymApp {
     public static void main(String[] args) throws SQLException, IOException {
         // Initialize services
         UserService userService = new UserService();
-        MembershipService membershipService = new MembershipService();
-        WorkoutClassService workoutClassService = new WorkoutClassService();
+        MembershipService membershipService = new MembershipService(new MembershipDAO(DatabaseConnection.getConnection()));
+        WorkoutClassService workoutClassService = new WorkoutClassService(new WorkoutClassDAO(DatabaseConnection.getConnection()));
 
         // Scanner for user input
         Scanner scanner = new Scanner(System.in);
@@ -70,13 +75,13 @@ public class GymApp {
                 System.out.println("Login Successful! Welcome " + user.getUsername());
                 switch (user.getRole().toLowerCase()) {
                     case "admin":
-                        showAdminMenu(scanner, (Admin) user, userService, membershipService, workoutService);
+                        showAdminMenu(scanner, (Admin) user, membershipService);
                         break;
                     case "trainer":
-                        showTrainerMenu(scanner, (Trainer) user, userService, membershipService, workoutService);
+                        showTrainerMenu(scanner, (Trainer) user, membershipService, workoutService);
                         break;
                     case "member":
-                        showMemberMenu(scanner, (Member) user, userService, membershipService, workoutService);
+                        showMemberMenu(scanner, (Member) user, membershipService, workoutService);
                         break;
                     default:
 
@@ -92,7 +97,7 @@ public class GymApp {
     }
 
     // Placeholder for Member menu
-    private static void showMemberMenu(Scanner scanner, Member user, UserService userService, MembershipService membershipService, WorkoutClassService workoutClassService) throws IOException {
+    private static void showMemberMenu(Scanner scanner, Member user, MembershipService membershipService, WorkoutClassService workoutClassService) throws IOException {
         int choice;
 
         do {
@@ -115,7 +120,7 @@ public class GymApp {
             switch (choice) {
                 case 1:
                     try {
-                        //workoutService.viewAllClasses()
+                        workoutClassService.listAllWorkoutClasses();
                     } catch (Exception e) {
                         System.out.println("   Error: Could not display all Workout Classes.");
                         CustomLogger.logError(e.getMessage());
@@ -123,7 +128,7 @@ public class GymApp {
                     break;
                 case 2:
                     try {
-                        //membershipService.displayMembershipExpenses(user.id);
+                        membershipService.displayUserTotalExpenses(user.getID());
                     } catch (Exception e) {
                         System.out.println("   Error: Could not display your Membership expenses.");
                         CustomLogger.logError(e.getMessage());
@@ -131,7 +136,7 @@ public class GymApp {
                     break;
                 case 3:
                     try {
-                        //membershipService.buyMembership(user.id);
+                        membershipService.purchaseMembership(new Membership());
                     } catch (Exception e) {
                         System.out.println("   Error: Could not purchase your membership.");
                         CustomLogger.logError(e.getMessage());
@@ -155,7 +160,7 @@ public class GymApp {
     }
 
     // Trainer menu
-    private static void showTrainerMenu(Scanner scanner, Trainer user, UserService userService, MembershipService membershipService, WorkoutClassService workoutService) throws IOException {
+    private static void showTrainerMenu(Scanner scanner, Trainer user, MembershipService membershipService, WorkoutClassService workoutService) throws IOException {
         int choice;
 
         do {
@@ -186,7 +191,7 @@ public class GymApp {
                     String workoutDescription = scanner.nextLine();
 
                     try {
-                        //workoutService.createClass(workoutType, workoutDescription, user);
+                        workoutService.createWorkoutClass(new WorkoutClass(workoutType, workoutDescription, user.getID()));
 
                         System.out.println("=== Workout Class Created ===");
                     } catch (Exception e) {
@@ -206,7 +211,7 @@ public class GymApp {
                     String workoutUpdatedDescription = scanner.nextLine();
 
                     try {
-                        //workoutService.updateClass(workoutID, workoutUpdatedType, workoutUpdatedDescription);
+                        workoutService.updateWorkoutClass(workoutID, workoutUpdatedType, workoutUpdatedDescription);
 
                         System.out.println("=== Workout Class Updated ===");
                     } catch (Exception e) {
@@ -216,11 +221,11 @@ public class GymApp {
                     break;
                 case 3:
                     System.out.print("Enter the ID of the class to delete: ");
-                    int WorkoutDeleteID = scanner.nextInt();
+                    int workoutDeleteID = scanner.nextInt();
                     scanner.nextLine();
 
                     try {
-                        //workoutService.deleteClass(workoutDeleteID);
+                        workoutService.deleteWorkoutClass(workoutDeleteID);
 
                         System.out.println("=== Workout Class Deleted ===");
                     } catch (Exception e) {
@@ -230,7 +235,7 @@ public class GymApp {
                     break;
                 case 4:
                     try {
-                        //workoutService.viewAllTrainerClasses(user.id);
+                        workoutService.listAllTrainerWorkoutClasses(user);
                     } catch (Exception e) {
                         System.out.println("   Error: Could not display your Workout Classes.");
                         CustomLogger.logError(e.getMessage());
@@ -238,7 +243,7 @@ public class GymApp {
                     break;
                 case 5:
                     try {
-                        //membershipService.buyMembership(user.id);
+                        membershipService.purchaseMembership(new Membership());
                     } catch (Exception e) {
                         System.out.println("   Error: Could not purchase your membership.");
                         CustomLogger.logError(e.getMessage());
@@ -262,7 +267,7 @@ public class GymApp {
     }
 
     // Admin menu
-    private static void showAdminMenu(Scanner scanner, Admin user, UserService userService, MembershipService membershipService, WorkoutClassService workoutService) throws SQLException, IOException {
+    private static void showAdminMenu(Scanner scanner, Admin user, MembershipService membershipService) throws SQLException, IOException {
         int choice;
 
         do {
@@ -307,7 +312,13 @@ public class GymApp {
                     }
                     break;
                 case 3:
-                    //TODO: Gym Membership Admin method(s).
+                    ArrayList<Membership> allMemberships = membershipService.getAllMemberships(user);
+
+                    for (Membership membership : allMemberships) {
+                        System.out.println(membership);
+                    }
+                    System.out.println("=== All Memberships Displayed ===");
+                    membershipService.displayTotalRevenue();
                     break;
                 case 4:
                     System.out.print("Enter the name of the product: ");

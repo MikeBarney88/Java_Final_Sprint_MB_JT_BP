@@ -3,6 +3,8 @@ package org.keyin.user.childclasses;
 import org.keyin.gymproduct.GymProduct;
 import org.keyin.gymproduct.GymProductDAO;
 import org.keyin.gymproduct.GymProductService;
+import org.keyin.memberships.Membership;
+import org.keyin.memberships.MembershipDAO;
 import org.keyin.user.User;
 import org.keyin.user.UserDAO;
 
@@ -50,11 +52,6 @@ public class Admin extends User {
 
         UserDAO.deleteUser(user);
     }
-
-    /**
-     * Displays all currently active gym memberships and their cumulative annual revenue.
-     */
-    //public ArrayList<Membership> getAllMemberships() {}
 
     /**
      * Allows this Admin User to define a new product to be sold.

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS memberships (
                     membership_type TEXT NOT NULL,
                     membership_description TEXT NOT NULL,
                     membership_cost INTEGER NOT NULL,
---                    *** member_id OR user_id TEXT NOT NULL ***
+                    user_id TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS workout_classes (

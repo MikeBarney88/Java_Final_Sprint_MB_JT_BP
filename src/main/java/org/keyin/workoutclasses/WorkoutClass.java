@@ -10,6 +10,20 @@ public class WorkoutClass {
     private int trainerId;
 
     /**
+     * Main constructor.
+     *
+     * @param type       the type of workout
+     * @param description the description of the class
+     * @param trainerId  the trainer's user ID
+     */
+    public WorkoutClass(String type, String description, int trainerId) {
+        this.workoutClassId = 0;
+        this.workoutClassType = type;
+        this.workoutClassDescription = description;
+        this.trainerId = trainerId;
+    }
+
+    /**
      * Full constructor.
      *
      * @param id         the class ID
