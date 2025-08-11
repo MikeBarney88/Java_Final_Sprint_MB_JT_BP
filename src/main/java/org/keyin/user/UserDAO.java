@@ -71,7 +71,6 @@ public class UserDAO {
             pstmt.setString(4, newUser.getPhoneNumber());
             pstmt.setString(5, newUser.getAddress());
             pstmt.setString(6, newUser.getRole());
-            pstmt.setString(7, newUser.getUsername());
             try {
                 pstmt.executeQuery();
             } catch (SQLException e) {
