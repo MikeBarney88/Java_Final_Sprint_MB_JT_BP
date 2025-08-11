@@ -60,7 +60,7 @@ public class UserDAO {
 
 
     public static void insertNewUser(User newUser) throws SQLException, IOException {
-        String sql = "INSERT INTO users(user_username, user_password, user_email, user_phonenumber, user_address, user_role) VALUES (?, ?, ?, ?, ?, ?) WHERE NOT EXISTS (SELECT 1 FROM users WHERE user_username = ?)RETURNING *";
+        String sql = "INSERT INTO users(user_username, user_password, user_email, user_phonenumber, user_address, user_role) VALUES (?, ?, ?, ?, ?, ?) RETURNING *";
         DriverManager DatabaseConnector;
 
         try (Connection conn = DatabaseConnection.getConnection();

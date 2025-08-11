@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS users (
                     user_id SERIAL PRIMARY KEY,
-                    user_username TEXT NOT NULL,
+                    user_username TEXT NOT NULL UNIQUE,
                     user_password TEXT NOT NULL,
-                    user_email TEXT NOT NULL,
+                    user_email TEXT NOT NULL UNIQUE,
                     user_address TEXT NOT NULL,
-                    user_phoneNumber TEXT NOT NULL,
+                    user_phoneNumber TEXT NOT NULL UNIQUE,
                     user_role TEXT NOT NULL
 );
 

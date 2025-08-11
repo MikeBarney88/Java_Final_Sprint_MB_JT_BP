@@ -33,8 +33,6 @@ public class GymApp {
         //new User("ExampleMember", "memberPassword", "member@example.com", "0000000000", "123 member lane", "member");
 
 
-
-
         // Scanner for user input
         Scanner scanner = new Scanner(System.in);
         int choice;
