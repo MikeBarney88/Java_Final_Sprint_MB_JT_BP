@@ -145,7 +145,25 @@ public class GymApp {
                     break;
                 case 3:
                     try {
-                        membershipService.purchaseMembership(new Membership());
+                        System.out.print("Will you be buying a Standard or a Premium membership? (s/p): ");
+                        String membershipType = scanner.nextLine();
+                        if (membershipType.equalsIgnoreCase("s")) {
+                            membershipType = "standard";
+
+                            System.out.print("Cost is $14.99, OK? (y/n): ");
+                            if (scanner.nextLine().equalsIgnoreCase("n")) {
+                                break;
+                            }
+                        } else if (membershipType.equalsIgnoreCase("p")) {
+                            membershipType = "premium";
+
+                            System.out.print("Cost is $19.99, OK? (y/n): ");
+                            if (scanner.nextLine().equalsIgnoreCase("n")) {
+                                break;
+                            }
+                        }
+
+                        membershipService.purchaseMembership(new Membership(membershipType, String.format("%s type membership with related privileges.", membershipType), 14.99, user.getID()));
                     } catch (Exception e) {
                         System.out.println("   Error: Could not purchase your membership.");
                         CustomLogger.logError(e.getMessage());
@@ -252,7 +270,25 @@ public class GymApp {
                     break;
                 case 5:
                     try {
-                        membershipService.purchaseMembership(new Membership());
+                        System.out.print("Will you be buying a Standard or a Premium membership? (s/p): ");
+                        String membershipType = scanner.nextLine();
+                        if (membershipType.equalsIgnoreCase("s")) {
+                            membershipType = "standard";
+
+                            System.out.print("Cost is $14.99, OK? (y/n): ");
+                            if (scanner.nextLine().equalsIgnoreCase("n")) {
+                                break;
+                            }
+                        } else if (membershipType.equalsIgnoreCase("p")) {
+                            membershipType = "premium";
+
+                            System.out.print("Cost is $19.99, OK? (y/n): ");
+                            if (scanner.nextLine().equalsIgnoreCase("n")) {
+                                break;
+                            }
+                        }
+
+                        membershipService.purchaseMembership(new Membership(membershipType, String.format("%s type membership with related privileges.", membershipType), 14.99, user.getID()));
                     } catch (Exception e) {
                         System.out.println("   Error: Could not purchase your membership.");
                         CustomLogger.logError(e.getMessage());
